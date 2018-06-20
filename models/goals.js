@@ -17,6 +17,11 @@ const goal = {
         orm.update("burgers", objColVals, condition, function(res) {
           cb(res);
         });
+      },
+      delete: function(condition, cb) {
+        orm.delete("burgers", condition, function(res) {
+          cb(res);
+        });
       }
 
 
