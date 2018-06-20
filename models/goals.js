@@ -7,7 +7,13 @@ const goal = {
             
             cb(result);
         });
-    }
+    },
+    create: function(cols, vals, cb) {
+        orm.create("burgers", cols, vals, function(res) {
+          cb(res);
+        });
+      }
+
 
 
 };//end goals controller object
