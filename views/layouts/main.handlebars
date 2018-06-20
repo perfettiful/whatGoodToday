@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/assets/style.css" type="text/css" />
+	<title>MVC With Goals!</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+	{{{ body }}}
+	<script>
+		// Make sure we wait to attach our handlers until the DOM is fully loaded.
+		$(function () {
+			$(".change-eaten").on("click", function (event) {
+				var id = $(this).data("id");
+				var newAccomplished = $(this).data("newAccomplished");
+				var newAccomplishedState = {
+					eaten: newAccomplished
+				};
+				// Send the PUT request.
+				$.ajax("/api/goals/" + id, {
+					type: "PUT",
+					data: newAccomplishedState
+				}).then(
+					function () {
+						console.log("changed eaten to", newAccomplished);
+						// Reload the page to get the updated list
+						location.reload();
+					}
+				);
+			});
+			$(".create-form").on("submit", function (event) {
+				// Make sure to preventDefault on a submit event.
+				event.preventDefault();
+				var newAccomplished = {
+					name: $("#goals").val().trim(),
+					eaten: $("[name=eaten]:checked").val().trim()
+				};
+				// Send the POST request.
+				$.ajax("/api/goals", {
+					type: "POST",
+					data: newAccomplished
+				}).then(
+					function () {
+						console.log("created new goal");
+						// Reload the page to get the updated list
+						location.reload();
+					}
+				);
+			});
+			$(".delete-goal").on("click", function (event) {
+				var id = $(this).data("id");
+				// Send the DELETE request.
+				$.ajax("/api/goals/" + id, {
+					type: "DELETE"
+				}).then(
+					function () {
+						console.log("deleted goal", id);
+						// Reload the page to get the updated list
+						location.reload();
+					}
+				);
+			});
+		});
+	</script>
+</body>
+
+</html>

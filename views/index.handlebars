@@ -1,0 +1,39 @@
+<h1>Goals!</h1>
+
+<h2>Goals that are not Accomplished!</h2>
+
+<ul>
+  {{#each goal}}
+  <li>{{this.goal_name}}</li>
+    {{!-- {{#unless accomplished}}
+      {{> Goals/goal-block accomplished=false}}
+    {{/unless}} --}}
+  {{/each}}
+</ul>
+
+<h2>Goals that are Accomplished!</h2>
+
+<ul>
+  {{#each goal}}
+    {{!-- {{#if accomplished}}
+      {{> Goals/ accomplished=false}}
+    {{/if}} --}}
+  {{/each}}
+</ul>
+
+<h2>Add a Goal</h2>
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="goal">Goal Name:</label>
+    <input type="text" id="goal" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="Accomplished">Accomplished?</label><br>
+    <input type="radio" name="Accomplished" value="1" checked> Accomplished!<br>
+    <input type="radio" name="Accomplished" value="0"> Not Accomplished!
+  </div>
+
+  <button type="submit">Add goal</button>
+</form>
